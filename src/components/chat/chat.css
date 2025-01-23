@@ -1,5 +1,140 @@
-.chat{
-    flex:2;
-    border-left:2px solid #dddddd35;
-    border-right: 2px solid #dddddd35;
+.chat {
+  flex: 2;
+  border-left: 2px solid #dddddd35;
+  border-right: 2px solid #dddddd35;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.chat .top {
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #dddddd35;
+}
+.top .user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.user img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.texts {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.texts span {
+  font-size: 18px;
+  font-weight: bold;
+}
+.texts p {
+  font-size: 14px;
+  font-weight: 300;
+  color: #a5a5a5;
+}
+.icons {
+  display: flex;
+  gap: 20px;
+}
+.icons img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.center {
+  flex: 1;
+  padding: 20px;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.center .message {
+  max-width: 70%;
+  display: flex;
+}
+.message img {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+.message .texts {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 5px;
+}
+.message .texts p {
+  padding: 20px;
+  background-color: rgba(17, 25, 40, 0.3);
+  color:white;
+  border-radius: 10px;
+}
+.message .texts span {
+  font-size: 13px;
+}
+.center .message.own {
+  align-self: flex-end;
+}
+.own .texts p {
+  background-color: #5183fe;
+  padding: 20px;
+}
+.own .texts img {
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.bottom {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #dddddd35;
+  gap: 20px;
+  margin-top: auto;
+}
+.bottom .icons {
+  display: flex;
+  gap: 20px;
+}
+.bottom img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.bottom input {
+  flex: 1;
+  background-color: rgba(17, 25, 40, 0.5);
+  border: none;
+  outline: none;
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+  font-size: 16px;
+}
+.sendButton {
+  background-color: #5183fe;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.emoji {
+  position: relative;
+}
+.emoji .picker {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
 }

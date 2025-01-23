@@ -40,6 +40,55 @@ function ChatList() {
           <p>Hello </p>
         </div>
       </div>
+      <div className="item">
+        <img src="./avatar.png" alt="" />
+        <div className='text'>
+          <span>John doe</span>
+          <p>Hello </p>
+        </div>
+      </div>
+      <div className="item">
+        <img src="./avatar.png" alt="" />
+        <div className='text'>
+          <span>John doe</span>
+          <p>Hello </p>
+        </div>
+      </div>
+      <div className="item">
+        <img src="./avatar.png" alt="" />
+        <div className='text'>
+          <span>John doe</span>
+          <p>Hello </p>
+        </div>
+      </div>
+      <div className="item">
+        <img src="./avatar.png" alt="" />
+        <div className='text'>
+          <span>John doe</span>
+          <p>Hello </p>
+        </div>
+      </div>
+      <div className="item">
+        <img src="./avatar.png" alt="" />
+        <div className='text'>
+          <span>John doe</span>
+          <p>Hello </p>
+        </div>
+      </div>
+      <div className="item">
+        <img src="./avatar.png" alt="" />
+        <div className='text'>
+          <span>John doe</span>
+          <p>Hello </p>
+        </div>
+      </div>
+      <div className="item">
+        <img src="./avatar.png" alt="" />
+        <div className='text'>
+          <span>John doe</span>
+          <p>Hello </p>
+        </div>
+      </div>
     </div>
   )
 }
