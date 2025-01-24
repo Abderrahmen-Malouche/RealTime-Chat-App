@@ -17,14 +17,14 @@
   border-radius: 10px;
   padding: 10px;
 }
-.searchBar input {
+.chatList .searchBar input {
   background-color: transparent;
   border: none;
   outline: none;
   color: white;
   flex:1
 }
-.searchBar img{
+.chatList.searchBar img{
     width: 20px;
     height: 20px; 
 }
@@ -36,7 +36,7 @@
     border-radius: 10px;
     cursor: pointer;
 }
-.item{
+.chatList .item{
     display:flex;
     align-items:center;
     gap: 20px;
@@ -44,22 +44,22 @@
     cursor:pointer;
     border-bottom:1px solid #dddddd35
 }
-.item img{
+.chatList .item img{
     width:50px;
     height: 50px;
     border-radius:50%;
     object-fit: cover;
 }
-.item .text{
+.chatList .item .text{
     display: flex;
     flex-direction:column ;
     gap: 10px;
 
 }
-.text span{
+.chatList .text span{
     font-weight: 500;
 }
-.text p{
+.chatList .text p{
     font-size:14px;
     font-weight:300;
 }

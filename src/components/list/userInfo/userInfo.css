@@ -4,22 +4,22 @@
     align-items: center;
     justify-content: space-between;
 }
-.user{
+.userInfo .user{
     display:flex;
     align-items: center;
     gap:20px;
 }
-.user img{
+.userInfo .user img{
     width:50px;
     height:50px;
     border-radius:50%;
     object-fit:cover;
 }
-.icons{
+.userInfo .icons{
     display: flex;
     gap:20px;
 }
-.icons img{
+.userInfo .icons img{
     width:20px;
     height:20px;
     cursor:pointer;
