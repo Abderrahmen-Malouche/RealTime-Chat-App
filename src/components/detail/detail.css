@@ -86,4 +86,8 @@
     border:none;
     outline:none;
     border-radius: 4px;
+    cursor:pointer;
+}
+.detail .logout:hover{
+    background-color: #639de9;
 }

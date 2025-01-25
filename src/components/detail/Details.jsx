@@ -1,11 +1,22 @@
 import React from "react";
 import "./detail.css";
+import { useDispatch } from "react-redux";
+import { clearUser } from "../../lib/authSlice";
+import { auth } from "../../config/firebase";
+import { signOut } from "firebase/auth";
+import { useSelector } from "react-redux";
 function Details() {
+  const { user, loading } = useSelector((state) => state.authReducers);
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    signOut(auth);
+    dispatch(clearUser());
+  };
   return (
     <div className="detail">
       <div className="user">
-        <img src="./avatar.png" alt="" />
-        <h2>Jane Doe</h2>
+        <img src={user.avatar || "./avatar.png"} alt="" />
+        <h2>{user.username}</h2>
         <p>Lorem ipsum dolor sit amet.</p>
       </div>
       <div className="info">
@@ -35,7 +46,7 @@ function Details() {
                 />
                 <span>Photo_23.png</span>
               </div>
-              <img src="./download.png" alt=""  className="icon"/>
+              <img src="./download.png" alt="" className="icon" />
             </div>
             <div className="photoItem">
               <div className="photoDetail">
@@ -55,7 +66,7 @@ function Details() {
                 />
                 <span>Photo_23.png</span>
               </div>
-              <img src="./download.png" alt=""  className="icon"/>
+              <img src="./download.png" alt="" className="icon" />
             </div>
             <div className="photoItem">
               <div className="photoDetail">
@@ -76,7 +87,9 @@ function Details() {
           </div>
         </div>
         <button className="block">Block User</button>
-        <button className="logout ">Logout</button>
+        <button className="logout" onClick={handleLogout}>
+          Logout
+        </button>
       </div>
     </div>
   );
