@@ -24,5 +24,5 @@ A real-time chat application built using *React*, *Firebase*, and *Vanilla CSS*.
 
 ## 🔗 Link for the Deployed Website :
 
-- 
+- https://real-time-chat-app-blue-delta.vercel.app/
 ---
