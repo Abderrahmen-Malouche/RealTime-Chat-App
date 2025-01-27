@@ -5,19 +5,34 @@ import { clearUser } from "../../lib/authSlice";
 import { auth } from "../../config/firebase";
 import { signOut } from "firebase/auth";
 import { useSelector } from "react-redux";
+import { updateDoc } from "firebase/firestore";
 function Details() {
-  const { user, loading } = useSelector((state) => state.authReducers);
+  const { user: currentUser, loading } = useSelector(
+    (state) => state.authReducers
+  );
+  const { chatId, user, isCurrentUserBlocked, isReceivedBlocked } = useSelector((state) => state.chatReducers);
   const dispatch = useDispatch();
   const handleLogout = () => {
     signOut(auth);
     dispatch(clearUser());
   };
+  const handleBlock = async () => {
+    if (!user) return;
+    try {
+      await updateDoc(doc(db, "users", currentUser.id), {
+        blocked: isReceivedBlocked ? arrayRemove(user.id) : arrayUnion(user.id),
+      });
+      dispatch(toggleBlock());
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="detail">
       <div className="user">
-        <img src={user.avatar || "./avatar.png"} alt="" />
-        <h2>{user.username}</h2>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <img src={user?.avatar || "./avatar.png"} alt="" />
+        <h2>{user?.username}</h2>
+        <p>Friend</p>
       </div>
       <div className="info">
         <div className="option">
@@ -86,7 +101,13 @@ function Details() {
             <img src="./arrowUp.png" alt="" />
           </div>
         </div>
-        <button className="block">Block User</button>
+        <button className="block" onClick={handleBlock}>
+          {isCurrentUserBlocked
+            ? "You are Blocked!"
+            : isReceivedBlocked
+            ? "User Blocked : Unblock"
+            : "Block"}
+        </button>
         <button className="logout" onClick={handleLogout}>
           Logout
         </button>

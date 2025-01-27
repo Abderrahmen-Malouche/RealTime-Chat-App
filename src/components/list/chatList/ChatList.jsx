@@ -4,15 +4,17 @@ import AddUser from "./addUser/AddUser";
 import { useSelector } from "react-redux";
 import { getDoc, onSnapshot, doc } from "firebase/firestore";
 import { db } from "../../../config/firebase";
-
+import { changeChat } from "../../../lib/chatSlice";
+import { useDispatch } from "react-redux";
+import { updateDoc } from "firebase/firestore";
 function ChatList() {
+  const dispatch=useDispatch()
   const [addMode, setAddMode] = useState(false);
   const [chats, setChats] = useState([]);
-  const { user,loading } = useSelector((state) => state.authReducers);
-
+  const { user:currentUser,loading } = useSelector((state) => state.authReducers);
   useEffect(() => {
-    if (!user?.id) return;
-    const unSub = onSnapshot(doc(db, "userchats", user.id), async (res) => {
+    if (!currentUser?.id) return;
+    const unSub = onSnapshot(doc(db, "userchats", currentUser.id), async (res) => {
       try {
         const items = res.data()?.chats || [];
         const promises = items.map(async (item) => {
@@ -24,12 +26,28 @@ function ChatList() {
         const chatData = await Promise.all(promises);
         setChats(chatData.sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0)));
       } catch (error) {
-        console.error("Error fetching chats:", error);
+        console.log("Error fetching chats:", error);
       }
     });
     return () => unSub();
-  }, [user?.id]);
+  }, [currentUser?.id]);
 
+  const handleSelect= async (chat)=>{
+    const userChats=chats.map((item)=>{
+      const {user,...rest}=item;
+      return rest;
+    })
+    const chatIndex=userChats.findIndex((item)=>item.chatId===chat.chatId)
+    userChats[chatIndex].isSeen=true;
+    const userChatsRef=doc(db,"userchats",currentUser.id)
+    try{
+      await updateDoc(userChatsRef,{chats:userChats})
+      dispatch(changeChat({chatId:chat.chatId,user:chat.user, currentUser:currentUser}))
+    }
+    catch(error){
+      console.log("Error fetching chats:", error);
+    }
+  }
   return (
     <div className="chatList">
       <div className="search">
@@ -45,7 +63,7 @@ function ChatList() {
         />
       </div>
       {chats.map((chat) => (
-        <div className="item" key={chat.chatId}>
+        <div className="item" key={chat.chatId} onClick={()=>handleSelect(chat)} style={{backgroundColor: chat?.isSeen ? "transparent" : "#5183fe"}}>
           <img src={chat.user.avatar} alt="User Avatar" />
           <div className="text">
             <span>{chat.user.username}</span>

@@ -7,7 +7,7 @@ import {
   doc,
   serverTimestamp,
   arrayUnion,
-  updateDoc
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../../../../config/firebase";
 import { useState } from "react";
@@ -32,10 +32,9 @@ function AddUser() {
     }
   };
   const handleAdd = async () => {
-  
     const chatRef = collection(db, "chats");
     const userChatsRef = collection(db, "userchats");
-  
+
     try {
       // Create a new chat document
       const newChatRef = doc(chatRef);
@@ -43,7 +42,8 @@ function AddUser() {
         createdAt: serverTimestamp(),
         messages: [],
       });
-  
+      
+
       // Update the userChats collection for the selected user
       await updateDoc(doc(userChatsRef, searchedUser.id), {
         chats: arrayUnion({
@@ -53,7 +53,7 @@ function AddUser() {
           updatedAt: Date.now(),
         }),
       });
-  
+
       // Update the userChats collection for the current user
       await updateDoc(doc(userChatsRef, user.id), {
         chats: arrayUnion({
@@ -63,14 +63,13 @@ function AddUser() {
           updatedAt: Date.now(),
         }),
       });
-  
+
       console.log(newChatRef.id);
     } catch (error) {
       console.error("Error adding user:", error);
     }
   };
-  
-  
+
   return (
     <div className="addUser">
       <form onSubmit={handleSearch}>
@@ -82,7 +81,7 @@ function AddUser() {
           <div className="detail">
             <img src={searchedUser.avatar || "./avatar.png"} alt="" />
             <span>{searchedUser.username}</span>
-          </div>  
+          </div>
           <button onClick={handleAdd}>Add user</button>
         </div>
       )}

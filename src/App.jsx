@@ -12,12 +12,16 @@ import { auth } from "./config/firebase";
 function App() {
     const dispatch = useDispatch();
     const { user, loading } = useSelector((state) => state.authReducers);
-
+    const {chatId}=useSelector((state)=>state.chatReducers)
     useEffect(() => {
         const unSub = onAuthStateChanged(auth, (authUser) => {
-                dispatch(fetchUser(authUser.uid)); 
+            if (authUser) {
+                dispatch(fetchUser(authUser.uid)); // Fetch user only when logged in
+            } else {
+                dispatch(clearUser()); // Clear user on logout
+            }
         });
-        return () => unSub();
+        return () => unSub();  
     }, [dispatch]);
 
     if (loading) {
@@ -29,8 +33,8 @@ function App() {
             {user ? (
                 <>
                     <List />
-                    <Chat />
-                    <Details />
+                    {chatId && <Chat />}
+                    {chatId && <Details />}
                 </>
             ) : (
                 <Login />
