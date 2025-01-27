@@ -130,7 +130,7 @@
   border-radius: 10px;
   cursor: pointer;
 }
-.chat .sendButton{
+.chat .sendButton:disabled{
   background-color: #5182feb4;
   cursor:not-allowed
 }
